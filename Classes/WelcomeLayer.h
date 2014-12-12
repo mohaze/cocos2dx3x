@@ -27,7 +27,10 @@ public:
     
 	CREATE_FUNC(WelcomeLayer);
     
-	//void loadingDone(Node* pNode);
+    
+    void menuCloseCallback(cocos2d::Ref* pSender);
+	
+    //void loadingDone(Node* pNode);
     
 	//virtual void keyBackClicked();//
 	//virtual void onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event);

@@ -8,6 +8,9 @@
 
 #include "WelcomeLayer.h"
 #include "Global.h"
+#include "cocostudio/CocoStudio.h"
+#include "ui/CocosGUI.h"
+#include "GameScene.h"
 
 WelcomeLayer::WelcomeLayer(){
     
@@ -29,5 +32,18 @@ bool WelcomeLayer::init(){
 	backGround->setPosition(Point(ORIGIN.x + VISIBLESIZE.width/2, ORIGIN.y + VISIBLESIZE.height/2));
 	this->addChild(backGround);
     
+    auto rootNode = CSLoader::createNode("MainScene.csb");
+    this->addChild(rootNode);
+    
+    auto closeItem = static_cast<ui::Button*>(rootNode->getChildByName("Button_1"));
+    closeItem->addTouchEventListener(CC_CALLBACK_1(WelcomeLayer::menuCloseCallback, this));
+    
     return true;
+}
+
+void WelcomeLayer::menuCloseCallback(Ref* pSender)
+{
+    auto scene = GameScene::create();
+	auto animationScene = TransitionFade::create(0.5f,scene);
+	Director::getInstance()->replaceScene(animationScene);
 }
